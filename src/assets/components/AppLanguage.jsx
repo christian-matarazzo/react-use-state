@@ -32,29 +32,53 @@ export function AppLanguage() { /* we export our component to reuse in main.jsx,
             description: "ReactJS è una libreria JavaScript per costruire interfacce utente, in particolare applicazioni a pagina singola. Consente agli sviluppatori di creare componenti UI riutilizzabili e di gestire efficacemente lo stato dell'applicazione."
         }
     ];
-    const [selected, setSelected] = useState(0) /* here we set our useState */
-
+    const [selected, setSelected] = useState(1) /* here we set our useState */
+    const description = languages.find((language) => language.id === selected) /* to work with a separated text we must isolate the id grabbed by selected, and use description.description if the condition is meet */
     return ( /* here we start working */
         <>
-            <div className="h1">Learn Web Development</div> {/* simple header: h1 in a div */}
-            <div className="container"> {/* bootstrap container start */}
-                <div className="row rows-col-6"> {/* bootstrap row start */}
-                    {languages.map((language) => ( /* here we use map on our array to cycle the objects */
-                        <> {/* here i create another fragment to use more div inside the same map function */}
-                            <div className="col"> {/* bootstrap col */}
 
-                                <button key={language.id} onClick={() => setSelected(language.id)} className="buttons">{language.title}</button> {/* button manipulation. we use language.whatWeNeed to get data and dynamicly inject in html */}
+            <div className="header text-center">
+                <h1>Learning Web Developing</h1>
+            </div>
+            <div className="main">
+                <div className="container">
+                    {languages.map((language) => (
 
-                            </div >
 
-                            <div className="text">{language.id == selected && language.description}</div> {/* here we must work with our other div, the text that must pop up when we press the button */}
+                        <button key={language.id} className={`button ${selected == language.id ? "btn btn-warning" : "btn btn-primary"}`} onClick={() => setSelected(language.id)}>{language.title}</button> /* we can use a ternary operator for change the button color directly inline */
 
-                        </>
                     ))}
                 </div>
-            </div >
+                <div className="text">{description && description.description}</div>
+            </div>
 
 
         </>
     )
 }
+
+
+
+
+
+
+
+
+
+{/* <div className="h1">Learn Web Development</div>  */ } {/* simple header: h1 in a div */ }
+{/* <div className="container"> */ } {/* bootstrap container start */ }
+{/* <div className="row rows-col-6"> */ } {/* bootstrap row start */ }
+{/* {languages.map((language) => (  */ }/* here we use map on our array to cycle the objects */
+<> {/* here i create another fragment to use more div inside the same map function */}
+    {/* <div className="col"> */} {/* bootstrap col */}
+
+    {/*  <button key={language.id} onClick={() => setSelected(language.id)} className="buttons">{language.title}</button> */} {/* button manipulation. we use language.whatWeNeed to get data and dynamicly inject in html */}
+
+    {/* </div > */}
+
+    {/* <div className="text">{language.id == selected && language.description}</div>  */}{/* here we must work with our other div, the text that must pop up when we press the button */}
+
+</>
+{/* ))} */ }
+{/* </div> */ }
+{/*  </div > */ }
